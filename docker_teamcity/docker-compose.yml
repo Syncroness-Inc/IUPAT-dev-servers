@@ -24,7 +24,7 @@ services:
 
   tc_agent:
     container_name: tc_agent
-    image: jetbrains/teamcity-agent
+    image: 4b1f2793c142
     cpu_quota: 66000
     restart: unless-stopped
     volumes:
