@@ -16,4 +16,4 @@
   * youtrack/conf
   * youtrack/backups
 4. Make owner of those directories 13001
-  * "chown -R 13001:13001 {dir}"
+  * `chown -R 13001:13001 {dir}`
