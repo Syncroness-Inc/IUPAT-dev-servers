@@ -21,7 +21,7 @@
   * 'docker-compose up -d'
 ## TeamCity
 ### AWS
-Create a Lightsail or EC2 instance with at least 4 Gb RAM
+Create a Lightsail or EC2 instance with at least 8 Gb RAM
 2. Open port 443
 3. Create and record static IP for instance
 4. Install Docker and docker-compose
