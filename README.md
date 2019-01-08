@@ -35,5 +35,12 @@ Create a Lightsail or EC2 instance with at least 4 Gb RAM
 5. Setup initial DB
   * `docker run -it --rm --net dockerteamcity_default --link tc_postgres:postgres postgres psql -h postgres -U postgres`
   * `create database teamcity;`
-  * `create user tc_user with encrypted password 'magpie123';`
+  * `create user tc_user with encrypted password 'supersecretpassword';`
   * `grant all privileges on database teamcity to tc_user;`
+6. Connect to Teamcity using https://{configured URL/IP}
+7. Setup Teamcity DB Connection
+  * Type: Postgres
+  * server: tc_postgres
+  * database: temacity
+  * user: tc_user
+  * pass: supersecretpassword
