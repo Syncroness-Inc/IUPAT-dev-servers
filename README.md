@@ -18,7 +18,7 @@
 4. Make owner of those directories 13001
   * `chown -R 13001:13001 {dir}`
 5. Start with docker from within docker_youtrack directory
-  * 'docker-compose up -d'
+  * `docker-compose up -d`
 ## TeamCity
 ### AWS
 1. Create a Lightsail or EC2 instance with at least 8 Gb RAM
@@ -31,7 +31,7 @@
 3. Put ssl certs into docker_teamcity/certs directory
   * files named nginx.crt and nginx.key or modify yt_default with correct cert names.
 4. Start with docker from within docker_youtrack directory
-  * 'docker-compose up -d'
+  * `docker-compose up -d`
 5. Setup initial DB
   * `docker run -it --rm --net dockerteamcity_default --link tc_postgres:postgres postgres psql -h postgres -U postgres`
   * `create database teamcity;`
