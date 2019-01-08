@@ -31,3 +31,12 @@ services:
       - ./teamcity/agentConfig:/data/teamcity_agent/conf
     environment:
       SERVER_URL: teamcity:8111
+
+  db:
+    container_name: tc_postgres
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: supersecret
+    volumes:
+      - ./teamcity/db_data:/var/lib/postgresql/data
