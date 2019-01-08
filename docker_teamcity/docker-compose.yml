@@ -39,4 +39,4 @@ services:
     environment:
       POSTGRES_PASSWORD: supersecret
     volumes:
-      - ./teamcity/db_data:/var/lib/postgresql/data
+      - ./teamcity/db_data/db:/var/lib/postgresql/data
