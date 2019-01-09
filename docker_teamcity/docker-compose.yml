@@ -30,8 +30,9 @@ services:
 
   tc_agent:
     container_name: tc_agent
-    #build agent here so we always know the name
-    image: javaagent:latest
+    build:
+      context: ./javaAgent
+      dockerfile: ./JavaAgent
     cpu_quota: 66000
     restart: unless-stopped
     volumes:
