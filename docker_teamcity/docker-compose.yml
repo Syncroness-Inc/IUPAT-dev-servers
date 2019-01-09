@@ -28,32 +28,33 @@ services:
     environment:
       TZ: US/Mountain
 
-  tc_agent:
-    container_name: tc_agent
+  tc_agent_1:
     build:
       context: ./javaAgent
       dockerfile: ./JavaAgent
+    image: javaagent
     cpu_quota: 66000
     restart: unless-stopped
     volumes:
-      - ./teamcity/agentConfig:/data/teamcity_agent/conf
+      - ./teamcity/agentConfig_1:/data/teamcity_agent/conf
       - /etc/timezone:/etc/timezone:ro
     environment:
       SERVER_URL: teamcity:8111
       TZ: US/Mountain
 
-  tc_agent2:
-    container_name: tc_agent2
-    #build agent here so we always know the name
-    image: javaagent:latest
+  tc_agent_2:
+    image: javaagent
+    depends_on:
+      - tc_agent_1
     cpu_quota: 66000
     restart: unless-stopped
     volumes:
-      - ./teamcity/agentConfig2:/data/teamcity_agent/conf
+      - ./teamcity/agentConfig_2:/data/teamcity_agent/conf
       - /etc/timezone:/etc/timezone:ro
     environment:
       SERVER_URL: teamcity:8111
       TZ: US/Mountain
+
 
   db:
     container_name: tc_postgres
