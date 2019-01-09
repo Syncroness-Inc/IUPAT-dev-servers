@@ -42,6 +42,19 @@ services:
       SERVER_URL: teamcity:8111
       TZ: US/Mountain
 
+  tc_agent2:
+    container_name: tc_agent2
+    #build agent here so we always know the name
+    image: javaagent:latest
+    cpu_quota: 66000
+    restart: unless-stopped
+    volumes:
+      - ./teamcity/agentConfig2:/data/teamcity_agent/conf
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      SERVER_URL: teamcity:8111
+      TZ: US/Mountain
+
   db:
     container_name: tc_postgres
     image: postgres
