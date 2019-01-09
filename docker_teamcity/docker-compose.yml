@@ -28,7 +28,7 @@ services:
     environment:
       TZ: US/Mountain
 
-  tc_agent:
+  agent_007:
     build:
       context: ./javaAgent
       dockerfile: ./JavaAgent
@@ -36,25 +36,27 @@ services:
     cpu_quota: 66000
     restart: unless-stopped
     volumes:
-      - ./teamcity/agentConfig:/data/teamcity_agent/conf
+      - ./teamcity/agent007Config:/data/teamcity_agent/conf
       - /etc/timezone:/etc/timezone:ro
     environment:
       SERVER_URL: teamcity:8111
       TZ: US/Mountain
+      AGENT_NAME: Agent 007
 
 #uncomment for 2nd agent
-#  tc_agent_2:
-#    image: javaagent
-#    depends_on:
-#      - tc_agent
-#    cpu_quota: 66000
-#    restart: unless-stopped
-#    volumes:
-#      - ./teamcity/agentConfig_2:/data/teamcity_agent/conf
-#      - /etc/timezone:/etc/timezone:ro
-#    environment:
-#      SERVER_URL: teamcity:8111
-#      TZ: US/Mountain
+  agent_smith:
+    image: javaagent
+    depends_on:
+      - agent_007
+    cpu_quota: 66000
+    restart: unless-stopped
+    volumes:
+      - ./teamcity/agentSmithConfig:/data/teamcity_agent/conf
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      SERVER_URL: teamcity:8111
+      TZ: US/Mountain
+      AGENT_NAME: Agent Smith
 
   db:
     container_name: tc_postgres
