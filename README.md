@@ -26,21 +26,16 @@
 3. Create and record static IP for instance
 4. Install Docker and docker-compose
 ### Server
-1. Copy "docker_teamcity" directory to instance 
+1. Download the git repository https://github.com/Syncroness-Inc/IUPAT-dev-servers/ 
 2. Modify docker_teamcity/nginx/tc_default.conf with the Static IP/Hostmane
 3. Put ssl certs into docker_teamcity/certs directory
   * files named nginx.crt and nginx.key or modify yt_default with correct cert names.
 4. Start with docker from within docker_youtrack directory
-  * `docker-compose up -d`
-5. Setup initial DB
-  * `docker run -it --rm --net dockerteamcity_default --link tc_postgres:postgres postgres psql -h postgres -U postgres`
-  * `create database teamcity;`
-  * `create user tc_user with encrypted password 'supersecretpassword';`
-  * `grant all privileges on database teamcity to tc_user;`
+  * `docker-compose -p teamcity up -d`
 6. Connect to Teamcity using https://{configured URL/IP}
 7. Setup Teamcity DB Connection
-  * Type: Postgres
+  * Type: PostgreSql
   * server: tc_postgres
-  * database: temacity
+  * database: teamcity
   * user: tc_user
-  * pass: supersecretpassword
+  * pass: supersecret
