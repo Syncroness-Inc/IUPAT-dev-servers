@@ -60,7 +60,10 @@ services:
 
   db:
     container_name: tc_postgres
-    image: postgres
+    build:
+      context: ./teamcityPsql
+      dockerfile: ./teamcityPostgresDockerfile
+    image: tc_postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: supersecret
