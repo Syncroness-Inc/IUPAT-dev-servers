@@ -10,7 +10,7 @@
 2. Modify docker_youtrack/nginx/yt_default.conf with the Static IP/Hostmane
 3. Put ssl certs into docker_youtrack/certs directory
   * files named nginx.crt and nginx.key or modify yt_default with correct cert names.
-3. Verify youtrack data directories inside docker_youtrack
+3. Verify or create youtrack data directories inside docker_youtrack
   * youtrack/data
   * youtrack/logs
   * youtrack/conf
@@ -21,7 +21,7 @@
   * `docker-compose up -d`
 ## TeamCity
 ### AWS
-1. Create a Lightsail or EC2 instance with at least 8 Gb RAM
+1. Create a Lightsail or EC2 instance with at least 2 Gb RAM (or at least 4 for a single local agent +4gb for each local agent)
 2. Open port 443
 3. Create and record static IP for instance
 4. Install Docker and docker-compose
@@ -32,10 +32,21 @@
   * files named nginx.crt and nginx.key or modify yt_default with correct cert names.
 4. Start with docker from within docker_youtrack directory
   * `docker-compose -p teamcity up -d`
-6. Connect to Teamcity using https://{configured URL/IP}
-7. Setup Teamcity DB Connection
+5. Connect to Teamcity using https://{configured URL/IP}
+6. Setup Teamcity DB Connection
   * Type: PostgreSql
   * server: tc_postgres
   * database: teamcity
   * user: tc_user
-  * pass: supersecret
+  * pass: supersecret (Please change this to something secure in the docker-compose.yml file before building)
+  
+### TeamCity build Agent
+1. Create a Lightsail or EC2 instance with at least 4Gb per agent running on machine
+2. Install Docker
+3. Download the git repository https://github.com/Syncroness-Inc/IUPAT-dev-servers/
+4. Build the java based agent
+  * from the docker_teamcity/javaAgent directory
+  * run 'docker build -f JavaAgent -t javaagent .'
+5. Run the agent
+  * 'docker run -it --name fast_agent --restart unless-stopped -e SERVER_URL="{temacity server internal IP}:8111" -e AGENT_NAME="Agent 007" -e TZ="US/Mountain" -v /home/ubuntu/agentConfig:/data/teamcity_agent/conf -v /etc/timzone:/etc/timzone:ro javaagent'
+  * for multiple agents, change the agent config volume, and Agent name.

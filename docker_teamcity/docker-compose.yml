@@ -28,36 +28,38 @@ services:
     environment:
       TZ: US/Mountain
 
-  agent_007:
-    build:
-      context: ./javaAgent
-      dockerfile: ./JavaAgent
-    image: javaagent
-    cpu_quota: 66000
-    restart: unless-stopped
-    volumes:
-      - ./teamcity/agent007Config:/data/teamcity_agent/conf
-      - /etc/timezone:/etc/timezone:ro
-    environment:
-      SERVER_URL: teamcity:8111
-      TZ: US/Mountain
-      AGENT_NAME: Agent 007
+#uncomment for local agent
+#  agent_007:
+#    build:
+#      context: ./javaAgent
+#      dockerfile: ./JavaAgent
+#    image: javaagent
+#    cpu_quota: 66000
+#    restart: unless-stopped
+#    volumes:
+#      - ./teamcity/agent007Config:/data/teamcity_agent/conf
+#      - /etc/timezone:/etc/timezone:ro
+#    environment:
+#      SERVER_URL: teamcity:8111
+#      TZ: US/Mountain
+#      AGENT_NAME: Agent 007
 
-#uncomment for 2nd agent
-  agent_smith:
-    image: javaagent
-    depends_on:
-      - agent_007
-    cpu_quota: 66000
-    restart: unless-stopped
-    volumes:
-      - ./teamcity/agentSmithConfig:/data/teamcity_agent/conf
-      - /etc/timezone:/etc/timezone:ro
-    environment:
-      SERVER_URL: teamcity:8111
-      TZ: US/Mountain
-      AGENT_NAME: Agent Smith
+#uncomment for local 2nd agent
+#  agent_smith:
+#    image: javaagent
+#    depends_on:
+#      - agent_007
+#    cpu_quota: 66000
+#    restart: unless-stopped
+#    volumes:
+#      - ./teamcity/agentSmithConfig:/data/teamcity_agent/conf
+#      - /etc/timezone:/etc/timezone:ro
+#    environment:
+#      SERVER_URL: teamcity:8111
+#      TZ: US/Mountain
+#      AGENT_NAME: Agent Smith
 
+#Change the password to something secure
   db:
     container_name: tc_postgres
     build:
