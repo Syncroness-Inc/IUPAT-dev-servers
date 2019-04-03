@@ -40,6 +40,12 @@
   * user: tc_user
   * pass: supersecret (Please change this to something secure in the docker-compose.yml file before building)
   
+### Server Update
+1. `docker-compose -p teamcity stop`
+2. `docker rm teamcity`
+3. `docker pull jetbrains/teamcity-server`
+4. `docker-compose -p teamcity up -d`
+  
 ### TeamCity build Agent
 1. Create a Lightsail or EC2 instance with at least 4Gb per agent running on machine
 2. Install Docker
